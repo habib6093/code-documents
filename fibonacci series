@@ -1,0 +1,33 @@
+#include<stdio.h>
+int main()
+{
+  int x=0,y=1,n,m,z,a;
+   printf("strat from wich number 0 or 1:\n");
+    scanf("%d",&a);
+     printf("how many term \n");
+    scanf("%d",&m);
+
+if(a==1){
+    z=1;
+    m=m-1;
+    printf("  %d\n",z);
+    }
+    if(a==0){
+        m=m-3;
+    }
+for(n=a;n<=m;n++){
+    if(n<=0){
+        z=0;
+        printf("  %d\n",z);
+        z=1;
+        printf("  %d\n",z);
+      
+    }
+  
+    z=x+y;
+    printf("  %d\n",z);
+    x=y;
+    y=z;
+      
+}
+} 
