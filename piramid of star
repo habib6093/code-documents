@@ -1,0 +1,19 @@
+#include<stdio.h>
+int main()
+{
+	int x,y,z,n=1,m=1,a,b;
+	printf("enter how many row\n");
+	scanf("%d",&a);
+	b=a-1;
+	for(x=1;x<=a;x++){
+		for(y=n;y<=b;y++){
+			printf(" ");
+		}
+		n=n+1;
+		for(z=1;z<=m;z++){
+			printf("*");
+		}
+		m=m+2;
+		printf("\n");
+	}
+}
