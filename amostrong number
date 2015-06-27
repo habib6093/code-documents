@@ -1,0 +1,45 @@
+#include<stdio.h>
+
+int main()
+
+{
+
+    int x,y,count=0,n,m;
+
+    printf("enter a number\n");
+
+    scanf("%d",&x);
+
+    n=x;
+
+    y=x;
+
+    while(x!=0){
+
+       
+
+        x=x/10;//37
+
+        y=y%10;//1
+
+        //printf("%d\n",y);
+
+        count=y*y*y+count;
+
+        y=x;
+
+       
+
+        }
+
+    if(count==n){
+
+        printf("this is amstrong number",count);
+
+    }
+
+    else printf("this is not amstrong number");
+
+   
+
+}
