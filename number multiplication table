@@ -1,0 +1,20 @@
+#include<stdio.h>
+int main()
+{
+	int y,z,a,b,count=0;
+	int x[10][10];
+	for(y=0;y<10;y++){
+		for(z=0;z<10;z++){
+			x[y][z]=(y+1)*(z+1);
+			
+		
+		
+		}
+		
+	}
+	printf("enter a number to multiplication:\n");
+	scanf("%d",&a);
+	for(b=1;b<=10;b++){
+		printf("%d * %d = %d\n",a,b,x[a-1][b-1]);
+	}
+}
