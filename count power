@@ -1,0 +1,25 @@
+#include<stdio.h>
+int main()
+{
+ int x,y,z,a,b;
+ scanf("%d%d",&x,&y);
+ a=x;
+ if(x<=y){
+ 	for(z=1;z<=y;z++){
+ 		b=y/x;
+ 		if(b==1){
+ 			break;
+		 }
+		 x=x*a;
+		 if(x>y){
+		 	break;
+		 //	printf("ans %d\n",z);
+		 }
+	 }
+ }
+ else if(a>y){
+ 	z=0;
+ 	
+ }
+ printf("%d",z);
+}
