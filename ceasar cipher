@@ -1,0 +1,124 @@
+
+
+#include<stdio.h>
+int main()
+{
+    int arr[5000],length,option,key,x,y,z,a=0,b=0;
+    char arra[5000];
+    printf("enter your massage\n");
+    gets(arra);
+    length=strlen(arra);
+    printf("\nenter 1 for encrypt 2 for decrypt\n ");
+     scanf("%d",&option);
+     printf("\nplease enter your key\n\n");
+     scanf("%d",&key);
+
+
+    if(option==1){
+    for(x=0;x<length;x++){
+    arr[x]=arra[x];
+
+
+    if(arr[x]==0){
+        arr[x]=0;
+    }
+
+    else if(isupper(arra[x])){
+        arr[x]=arr[x]+key;
+        if(arr[x]>90){
+                a=0;
+            for(y=91;y<=arr[x];y++){
+                a=a+1;
+            }
+            arr[x]=64+a;
+        }
+
+
+            }
+
+
+        else if(islower(arra[x])){
+            arr[x]=arr[x]+key;
+            if(arr[x]>122){
+                a=0;
+                for(y=123;y<=arr[x];y++){
+                    a=a+1;
+                }
+                arr[x]=96+a;
+            }
+        }
+
+
+
+        }
+
+
+
+     }
+
+
+
+
+
+
+
+       if(option==2){
+    for(x=0;x<length;x++){
+    arr[x]=arra[x];
+
+
+    if(arr[x]==0){
+        arr[x]=0;
+    }
+
+    else if(isupper(arra[x])){
+        arr[x]=arr[x]-key;
+        if(arr[x]<65){
+                a=0;
+            for(y=64;y>=arr[x];y--){
+                a=a+1;
+            }
+            arr[x]=91-a;
+        }
+
+
+            }
+
+
+        else if(islower(arra[x])){
+            arr[x]=arr[x]-key;
+            if(arr[x]<97){
+                a=0;
+                for(y=96;y>=arr[x];y--){
+                    a=a+1;
+                }
+                arr[x]=123-a;
+            }
+        }
+
+
+
+        }
+
+
+
+     }
+
+
+
+
+
+     printf("\n\n");
+
+
+
+
+     for(y=0;y<length;y++){
+        printf("%c",arr[y]);
+     }
+
+
+printf("\n\n");
+
+return 0;
+}
