@@ -17,7 +17,7 @@ lengthk=strlen(keyword);
 
 
 
-for(x=0;x<lengthm;x++){
+for(x=0;x<lengthm;){
     for(y=0;y<lengthk;y++){
         key[x]=keyword[y];
         x=x+1;
