@@ -1,130 +1,151 @@
+
+
+
 #include<stdio.h>
-#include<string.h>
 int main()
 {
-
-int key[500],asci[500],lengthm,lengthk,option,x,y,z,a;
-char massage[500],keyword[50];
-
-printf("enter your massage\n");
-gets(massage);
-lengthm=strlen(massage);
-printf("\nenter 1 to encryption,2 to decryption\n");
-scanf("%d",&option);
-printf("\nenter a secreat keyword\n");
-scanf("%s",keyword);
-lengthk=strlen(keyword);
-
-
-
-for(x=0;x<lengthm;){
-    for(y=0;y<lengthk;y++){
-        key[x]=keyword[y];
-        x=x+1;
-
-    }
-}
-
-
-if(option==1){
-    for(x=0,a=0;x<lengthm;x++){
-
-        asci[x]=massage[x];
+    int arr[5000],key[5000],lengthm,lengthk,option,x,y,z,a=0,b=0;
+    char arra[5000],keyword[500];
+    printf("enter your massage\n");
+    gets(arra);
+    lengthm=strlen(arra);
+    printf("\nenter 1 for encrypt 2 for decrypt\n ");
+     scanf("%d",&option);
+     printf("\nplease enter your keyword\n\n");
+     scanf("%s",keyword);
+     lengthk=strlen(keyword);
 
 
 
 
+     for(x=0;x<lengthm;){
+        for(y=0;y<lengthk;y++){
+             if(isupper(keyword[y])){
+                key[x]=keyword[y]-65;
+                x=x+1;
+             }
 
-        if(islower(massage[x])){
-            asci[x]=asci[x]+key[a];
-
-            if(asci[x]>122){
-                while(asci[x]>122){
-                        z=0;
-                    for(y=123;y<=asci[x];y++){
-                        z=z+1;
-                    }
-                    asci[x]=96+z;
-
-                }
-            }
-            a=a+1;
-        }
-        
-        
-        
-        else if(isupper(massage[x])){
-        	asci[x]=asci[x]+key[a];
-        	if(asci[x]>90){
-        		while(asci[x]>90){
-        			z=0;
-        			for(y=90;y<=asci[x];y++){
-        				z=z+1;
-					}
-					asci[x]=64+z;
-					
-				}
-			}
-			a=a+1;
-		}
-
-}
-
-}
-
-
-if(option==2){
-    for(x=0,a=0;x<lengthm;x++){
-    	
-        asci[x]=massage[x];
-
-
-        if(islower(massage[x])){
-            asci[x]=asci[x]-key[a];
-            if(asci[x]<97){
-                
-                while(asci[x]<97){
-                	z=0;
-                    for(y=asci[x];y<97;y++){
-                        z=z+1;
-                    }
-                     asci[x]=123-z;
-
-                }
-            }
-             a=a+1;
+             else if(islower(keyword[y])){
+                key[x]=keyword[y]-97;
+                x=x+1;
+             }
 
 
         }
-        
-        
-       else if(isupper(massage[x])){
-       	asci[x]=asci[x]-key[a];
-       	if(asci[x]<65){
-       		while(asci[x]<65){
-       			z=0;
-       			for(y=asci[x];y<=65;y++){
-       				z=z+1;
-       				
-				   }
-				   asci[x]=91-z;
-			   }
-		   }
-		   a=a+1;
-	   }
+     }
 
+
+
+
+
+    if(option==1){
+    for(x=0,y=0;x<lengthm;x++){
+    arr[x]=arra[x];
+
+
+    if(arr[x]==0){
+        arr[x]=0;
     }
 
-}
+    else if(isupper(arra[x])){
+        arr[x]=arr[x]+key[y];
+        if(arr[x]>90){
+                a=0;
+            for(y=91;y<=arr[x];y++){
+                a=a+1;
+            }
+            arr[x]=64+a;
+        }
+y=y+1;
+
+            }
+
+
+        else if(islower(arra[x])){
+            arr[x]=arr[x]+key[y];
+            if(arr[x]>122){
+                a=0;
+                for(y=123;y<=arr[x];y++){
+                    a=a+1;
+                }
+                arr[x]=96+a;
+            }
+            y=y+1;
+        }
+
+
+
+        }
+
+
+
+     }
+
+
+
+
+
+
+
+       if(option==2){
+    for(x=0,y=0;x<lengthm;x++){
+    arr[x]=arra[x];
+
+
+    if(arr[x]==0){
+        arr[x]=0;
+    }
+
+    else if(isupper(arra[x])){
+        arr[x]=arr[x]-key[y];
+        if(arr[x]<65){
+                a=0;
+            for(y=64;y>=arr[x];y--){
+                a=a+1;
+            }
+            arr[x]=91-a;
+        }
+y=y+1;
+
+            }
+
+
+        else if(islower(arra[x])){
+            arr[x]=arr[x]-key[y];
+            if(arr[x]<97){
+                a=0;
+                for(y=96;y>=arr[x];y--){
+                    a=a+1;
+                }
+                arr[x]=123-a;
+
+            }
+            y=y+1;
+        }
+
+
+
+        }
+
+
+
+     }
+
+
+
+
+
+     printf("\n\n");
+
+
+
+
+     for(y=0;y<lengthm;y++){
+        printf("%c",arr[y]);
+     }
+
 
 printf("\n\n");
 
-
-for(y=0;y<lengthm;y++){
-    printf("%c",asci[y]);
-    
-
-}
-
-
+return 0;
 }
