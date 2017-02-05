@@ -1,0 +1,64 @@
+#include<iostream>
+#include<cstring>
+#include<map>
+
+using namespace std;
+
+
+
+string wow;
+int lengthm,total=0;
+
+
+void show(string sen)
+{
+	if(sen.length()==lengthm)
+	{
+		cout<<sen<<endl;
+		total++;
+		return;
+	}
+	
+	else
+	{
+		string ms=sen;
+		map<char,int> check;
+		for(int x=0;x<ms.length();x++)
+		{
+			check[ms[x]]=1;
+		}
+		
+		for(int x=0;x<lengthm;x++)
+		{
+			sen=ms;
+			if(check[wow[x]]==0)
+			{
+				sen.insert(sen.length(),1,wow[x]);
+				show(sen);
+			}
+		}
+	}
+	
+}
+
+
+
+int main()
+{
+	string sen;
+	cin>>sen;
+	
+	
+	lengthm=sen.length();
+	wow=sen;
+	
+	for(int x=0;x<lengthm;x++)
+	{
+		string ms;
+		ms.insert(ms.length(),1,sen[x]);
+		show(ms);
+		
+	}
+	
+	cout<<"total permutation: "<<total<<endl;
+}
