@@ -1,0 +1,135 @@
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main() {
+	
+	int test;
+	cin>>test;
+	
+	for(int x=1;x<=test;x++)
+	{
+		int tunnel,l_n;
+		cin>>tunnel>>l_n;
+		
+		int arr[tunnel+3];
+		
+		for(int y=0;y<tunnel;y++)
+		{
+			cin>>arr[y];
+		}
+		
+		char m='S';
+		int value=0,left_len=0,right_len=0,mid=0;
+		
+		for(int y=0;y<tunnel;y++)
+		{
+			char s;
+			cin>>s;
+			
+			if(mid==1)
+			{   
+				if(m!=s)
+				{    
+					mid=0;
+					if(arr[y]>=l_n)
+					{
+						
+						arr[y]-=l_n;
+						right_len=0;
+						left_len=0;
+					}
+					else
+					{
+						left_len=0;
+						right_len=l_n-arr[y];
+						arr[y]=0;
+					}
+					
+				}
+				
+				else
+				{
+					if(arr[y]>(left_len))
+					{
+						mid=0;
+						arr[y]-=left_len;
+						left_len=0;
+						if(arr[y]>=right_len)
+						{
+							arr[y]-=right_len;
+						    right_len=0;
+						}
+						else
+						{
+							right_len-=arr[y];
+							arr[y]=0;
+						}
+						
+					}
+					
+					else
+					{
+						left_len-=arr[y];
+						arr[y]=0;
+					}
+				}
+		    }
+		    
+		    else if(right_len!=0)
+		    {
+		    	if(m==s)
+		    	{
+		    		if(arr[y]>=right_len)
+		    		{
+		    			arr[y]-=right_len;
+		    			right_len=0;
+		    		}
+		    		else
+		    		{  
+		    			right_len-=arr[y];
+		    			arr[y]=0;
+		    			
+		    		}
+		    	}
+		    	else
+		    	{
+		    		right_len=0;
+		    	}
+		    	
+		    }
+		
+			
+			
+			if(arr[y]!=0)
+			{
+				value+=arr[y]/(2*l_n);
+				int temp=arr[y]%(2*l_n);
+				
+				if(temp<=l_n&&temp!=0)
+				{
+					value++;
+					mid=1;
+					
+					left_len=l_n-temp;
+					right_len=l_n;
+				}
+				else if(temp!=0)
+				{
+					value++;
+					right_len=temp-l_n;
+				}
+				
+			}
+			
+		
+		    m=s;
+		}
+		
+		cout<<"Case "<<x<<": ";
+		cout<<value<<endl;
+	}
+	
+	return 0;
+}
