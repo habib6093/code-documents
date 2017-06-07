@@ -1,0 +1,42 @@
+#include <iostream>
+using namespace std;
+string sen;
+int n;
+
+
+
+void pex(string sem,int arr[])
+{
+	if(sem.length()==n)
+	 {
+	 	cout<<sem<<endl;
+	 	return;
+	 }
+	 
+	for(int x=0;x<n;x++)
+	 {
+	 	if(arr[x]==0)
+	 	 {
+	 	 	int ars[n]={};
+	 	 	for(int y=0;y<n;y++)
+	 	 	 ars[y]=arr[y];
+	 	 	 
+	 	 	ars[x]=1;
+	 	 	string si=sem+sen[x];
+	 	 	pex(si,ars);
+	 	 	
+	 	 }
+	 }
+	
+}
+
+int main() {
+	
+	cin>>sen;
+	n=sen.length();
+	
+	int arr[n]={};
+	string sem;
+	pex(sem,arr);
+	return 0;
+}
