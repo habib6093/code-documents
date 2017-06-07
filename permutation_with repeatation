@@ -1,0 +1,33 @@
+#include <iostream>
+using namespace std;
+string sen;
+int n;
+
+
+
+void pex(string sem)
+{
+	if(sem.length()==n)
+	 {
+	 	cout<<sem<<endl;
+	 	return;
+	 }
+	 
+	for(int x=0;x<n;x++)
+	 {
+	 	string si=sem+sen[x];
+	 	pex(si);
+	 }
+	
+}
+
+int main() {
+	
+	cin>>sen;
+	n=sen.length();
+	
+
+	string sem;
+	pex(sem);
+	return 0;
+}
