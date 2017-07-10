@@ -1,0 +1,77 @@
+
+https://www.hackerearth.com/practice/data-structures/advanced-data-structures/trie-keyword-tree/tutorial/
+
+
+#include <iostream>
+#include <cstring>
+using namespace std;
+class node
+{
+ public:
+  node *arr[27];
+  int value=0;
+  node()
+  {
+  	for(int x=0;x<27;x++)
+  	 arr[x]=NULL;
+  }
+	
+};
+
+int main() {
+	
+	int n,m;
+	cin>>n>>m;
+	
+	node head;
+	
+	for(int x=0;x<n;x++)
+	{
+		string sen;
+		int length,value;
+		node *ob;
+		ob=&head;
+		cin>>sen>>value;
+		length=sen.length();
+		
+		for(int y=0;y<length;y++)
+		{
+			if(ob->arr[sen[y]-96]==NULL)
+				ob->arr[sen[y]-96]=new node();
+			ob=ob->arr[sen[y]-96];
+		
+			if(ob->value<value)
+			    ob->value=value;
+		}
+	}
+	//cout<<"hello"<<endl;
+	for(int x=0;x<m;x++)
+	{
+		string sen;
+		cin>>sen;
+		node *ob;
+		ob=&head;
+		int length=sen.length();
+		
+		for(int y=0;y<length;y++)
+		{   //cout<<"y: "<<y<<endl;
+			if(ob->arr[sen[y]-96]==NULL)
+			 {
+			 	cout<<-1<<endl;
+			 	break;
+			 }
+			 else
+			  ob=ob->arr[sen[y]-96];
+			 
+			 if(y==length-1)
+			  cout<<ob->value<<endl;
+		}
+		
+		
+	}
+	
+	
+	
+	
+	return 0;
+}
