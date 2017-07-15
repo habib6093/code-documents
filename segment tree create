@@ -1,0 +1,43 @@
+#include <iostream>
+using namespace std;
+
+int create(int l,int r,int at,int ars[],int arr[])
+{
+
+ if(l==r)
+ { 
+ 	ars[at]=arr[l];
+ 	return 0;
+ }
+ 
+ create(l,(l+r)/2,at*2,ars,arr);
+ create((l+r)/2+1,r,at*2+1,ars,arr);
+ 
+ ars[at]=ars[at*2]+ars[at*2+1];
+	
+}
+
+int main() {
+	int n;
+	cin>>n;
+	
+	int arr[n+3]={},ars[n*4]={};
+	
+     cout<<n<<endl;
+	
+	for(int x=0;x<n;x++)
+	{
+		cin>>arr[x];
+	}
+
+	
+	create(0,n-1,1,ars,arr);
+	
+	for(int x=1;x<n*4;x++)
+	{
+		cout<<"x: "<<x<<"  value: "<<ars[x]<<endl;
+	}
+	
+	
+	return 0;
+}
