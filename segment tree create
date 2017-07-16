@@ -17,26 +17,71 @@ int create(int l,int r,int at,int ars[],int arr[])
 	
 }
 
+
+int query(int at,int L,int R,int l,int r,int ars[])
+{
+	if(l>R||r<L)
+	 return 0;
+	if(L==l&&R==r)
+	 return ars[at];
+	 
+	int x=query(at*2,L,(L+R)/2,l,r,ars);
+	int y=query(at*2+1,(L+R)/2+1,R,l,r,ars);
+	
+	return x+y;
+}
+
+
+int update(int at,int value,int position,int l,int r,int arr[],int ars[])
+{   
+	if(l==r&&l==position)
+	{
+		arr[l]=value;
+		ars[at]=value;
+		return 0;
+	}
+	
+	int mid=(l+r)/2;
+	
+	if(position<=mid)
+	 update(at*2,value,position,l,mid,arr,ars);
+	else
+	 update(at*2+1,value,position,mid+1,r,arr,ars);
+	 
+	ars[at]=ars[at*2]+ars[at*2+1];
+	
+}
+
 int main() {
 	int n;
 	cin>>n;
 	
 	int arr[n+3]={},ars[n*4]={};
 	
-     cout<<n<<endl;
 	
-	for(int x=0;x<n;x++)
+	for(int x=1;x<=n;x++)
 	{
 		cin>>arr[x];
 	}
 
 	
-	create(0,n-1,1,ars,arr);
+	create(1,n,1,ars,arr);
 	
-	for(int x=1;x<n*4;x++)
-	{
-		cout<<"x: "<<x<<"  value: "<<ars[x]<<endl;
-	}
+	int start,end;
+	
+	cout<<"enter range you want to sum"<<endl;
+	cin>>start>>end;
+	
+	cout<<"result is: "<<query(1,1,n,start,end,ars)<<endl;
+	
+	
+	int value,position;
+	cout<<"enter value and position you want to change: "<<endl;
+	cin>>value>>position;
+	
+	update(1,value,position,1,5,arr,ars);
+	
+	cout<<"after update result is: "<<query(1,1,n,start,end,ars)<<endl;
 	
 	
 	return 0;
