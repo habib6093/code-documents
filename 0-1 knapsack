@@ -1,0 +1,63 @@
+#include <iostream>
+#include <algorithm>
+using namespace std;
+
+int main() {
+	
+	int item,knapsack_weight;
+	cin>>item>>knapsack_weight;
+	
+	int item_arr[item+2][2],arr[item+1][knapsack_weight+1],value=0;
+	
+	for(int x=1;x<=item;x++)
+	 {
+	 	cin>>item_arr[x][0]>>item_arr[x][1];///weight -- value
+	 }
+	 
+	 
+	 
+	 arr[0][0]=0;
+    for(int x=1;x<=item;x++)
+     {
+     	for(int y=1;y<=knapsack_weight;y++)
+     	 {
+     	 	//cout<<"item "<<item_arr[x][0]<<"  y: "<<y<<endl;
+     	 	if(item_arr[x][0]>y)
+     	 	 { 
+     	 	 	 if(y-1==0||x-1==0)
+     	 	 	   arr[x][y]=0;
+     	 	 	 else
+     	 	       arr[x][y]=arr[x-1][y];
+     	 	       
+     	 	       cout<<arr[x][y]<<endl;
+     	 	 }
+     	 	  
+     	 	else
+     	 	{
+     	 	 arr[x][0]=0;
+     	 	 arr[0][y]=0;
+     	 	// cout<<"arr[x-1][y]: "<<arr[x-1][y]<<endl;
+     	 	 arr[x][y]=max(arr[x-1][y],(item_arr[x][1]+arr[x-1][y-item_arr[x][0]]));
+     	 	}
+     	 	//cout<<"value: "<<arr[x][y]<<endl;
+     	 	 
+     	 	if(value==0||value<arr[x][y])
+     	 	 value=arr[x][y];
+     	 	
+     	 }
+     }
+     
+     for(int x=0;x<=item;x++)
+     {
+     	for(int y=0;y<=knapsack_weight;y++)
+     	{
+     		cout<<arr[x][y]<<" ";
+     	}
+     	cout<<endl;
+     }
+     
+    
+    cout<<"value is: "<<value<<endl;
+	
+	return 0;
+}
