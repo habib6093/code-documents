@@ -1,0 +1,40 @@
+#include <iostream>
+#include <cstring>
+#include <algorithm>
+
+using namespace std;
+
+int main() {
+    
+    string sen,sem; /// comparing two string
+    cin>>sen>>sem;
+    
+    int len,lem;
+    len=sen.length();
+    lem=sem.length();
+    
+    int arr[len+1][lem+1];
+    
+    for(int x=1;x<=len;x++)
+     {
+     	for(int y=1;y<=lem;y++)
+     	 {
+     	   arr[x][0]=0;
+     	   arr[0][y]=0;
+     	 	
+     	   if(sen[x-1]!=sem[y-1])
+     	 	{
+     	 	   arr[x][y]=max(arr[x-1][y],arr[x][y-1]);
+     	 	}
+     	   else
+     	    {
+     	    	arr[x][y]=arr[x-1][y]+1;
+     	    }
+     	 	
+     	 }
+     }
+    
+    cout<<arr[len][lem]<<endl;
+    
+	return 0;
+}
