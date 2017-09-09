@@ -1,0 +1,22 @@
+#include<iostream>
+#include<math.h>
+using namespace std;
+
+
+int main()
+{
+	int x;
+	cin>>x;
+  for(int y=2;y<=sqrt(x)+1;y++)
+     {
+          while(x%y==0)
+           {
+            cout<<y<<" ";
+            x/=y;
+           }
+     }
+	if(x>1)
+	 cout<<x;
+	 
+	cout<<endl;
+}
