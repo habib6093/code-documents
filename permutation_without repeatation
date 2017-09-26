@@ -1,42 +1,44 @@
-#include <iostream>
+#include<iostream>
+#include<cstring>
+
 using namespace std;
+
 string sen;
-int n;
+int length;
 
-
-
-void pex(string sem,int arr[])
+void permutation(string temp,int position[])
 {
-	if(sem.length()==n)
-	 {
-	 	cout<<sem<<endl;
-	 	return;
-	 }
-	 
-	for(int x=0;x<n;x++)
-	 {
-	 	if(arr[x]==0)
-	 	 {
-	 	 	int ars[n]={};
-	 	 	for(int y=0;y<n;y++)
-	 	 	 ars[y]=arr[y];
-	 	 	 
-	 	 	ars[x]=1;
-	 	 	string si=sem+sen[x];
-	 	 	pex(si,ars);
-	 	 	
-	 	 }
-	 }
-	
+   if(temp.size()>=length)
+    {
+       cout<<temp<<endl;
+       return;
+    }
+   
+   for(int i=0;i<length;i++)
+    {
+       if(position[i]==0)
+        { 
+          string js=temp;
+          temp+=sen[i];
+          position[i]=1;
+          
+          permutation(temp,position);
+          
+          temp=js;
+          position[i]=0;
+        }
+    }
 }
 
-int main() {
-	
-	cin>>sen;
-	n=sen.length();
-	
-	int arr[n]={};
-	string sem;
-	pex(sem,arr);
-	return 0;
+
+int main()
+{
+   cin>>sen;
+   length=sen.length();
+   
+   string temp;
+   int position[length+2]={};
+   
+   permutation(temp,position);
+   
 }
