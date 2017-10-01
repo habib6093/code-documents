@@ -1,0 +1,83 @@
+#include <iostream>
+#include <queue>
+#include <map>
+using namespace std;
+
+int main() {
+  
+ // queue<int> node[1000000];
+  int x,y;
+  cin>>x>>y;
+  queue<int> node[x+2];
+  
+  for(int a=1;a<=y;a++)
+   {
+     int b,c;
+     cin>>b>>c;
+     
+     node[b].push(c);
+     node[c].push(b);
+   }
+   
+  map<int,bool> check;
+  queue<int> arr;
+  int ars[x+1]={},tag=0,count=0;
+  
+  for(int a=0;a<x;a++)
+   {
+      if(count==x)
+       break;
+   	
+      if(!check[a])
+       {    
+       	check[a]=true;
+       	arr.push(a);
+       	tag++;
+       	ars[tag]++;
+       	count++;
+       }
+      while(!arr.empty())
+       {    
+       	int m=arr.front();
+       	arr.pop();
+       	while(!node[m].empty())
+       	 {
+       	 	if(!check[node[m].front()])
+       	 	 {
+       	 	 	ars[tag]++;
+       	 	 	check[node[m].front()]=true;
+       	 	 	arr.push(node[m].front());
+       	 	 	count++;
+       	 	 }
+       	 	node[m].pop();
+       	 }
+       }
+   }
+   
+   
+  long long int total=0;
+  int sum[tag+2]={};
+  
+  //for(int a=1;a<=tag;a++)
+  // {
+  //   for(int b=a+1;b<=tag;b++)
+  //    {
+  //    	total+=ars[a]*ars[b];
+  //    }
+  // }
+  ////////////// instead few line of code avobe ,i used a tick below //////// 
+  
+  
+  for(int a=1;a<=tag;a++)
+  {
+   sum[a]+=(ars[a]+sum[a-1]);	
+  }
+  
+  for(int a=1;a<tag;a++)
+  {
+  	total+=ars[a]*(sum[tag]-sum[a]);
+  }
+  
+  cout<<total<<endl;	
+  return 0;
+}
