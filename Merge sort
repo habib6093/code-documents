@@ -1,0 +1,81 @@
+#include<iostream>
+#include<vector>
+
+using namespace std;
+
+
+vector<int> merge(vector<int>* arr,vector<int>* arrs)
+{
+   vector<int> final;
+   
+   while(arr->size()>0 || arrs->size()>0)
+   {  
+     if(arr->size()>0 && (arrs->size()==0 || arr->back()>=arrs->back()))
+       {
+       	final.insert(final.begin(),arr->back());
+       	arr->pop_back();
+       }
+       
+     else if(arrs->size()>0 && (arr->size()==0 || arrs->back()>=arr->back()))
+       {
+       	final.insert(final.begin(),arrs->back());
+       	arrs->pop_back();
+       }
+     
+   }
+   
+   return final;
+}
+
+
+
+vector<int> mergesort(vector<int>* arr)
+{
+ 
+   
+   if(arr->size()<=1)
+    return *arr;
+    
+   vector<int> one;
+   vector<int> two;
+   
+   int size=arr->size();
+   
+   one.assign(arr->begin(),arr->begin()+size/2);
+   two.assign(arr->begin()+(size/2),arr->end());
+ 
+   
+   one=mergesort(&one);
+   two=mergesort(&two);
+   
+   vector<int> final;
+   final=merge(&one,&two);
+   
+   return final;
+   
+}
+
+
+int main()
+{
+   int length;
+   cin>>length;
+   
+   vector<int> arr;
+   
+   for(int x=0;x<length;x++)
+   {
+     int m;
+     cin>>m;
+     
+     arr.push_back(m);
+   }
+  
+   
+   arr=mergesort(&arr);
+   
+   for(int x=0;x<length;x++)
+   {
+     cout<<arr[x]<<" ";
+   }
+}
