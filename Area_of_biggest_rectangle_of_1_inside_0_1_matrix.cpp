@@ -1,103 +1,92 @@
 #include<iostream>
-#include<stack>
-#include <utility>
-
+#include<vector>
 
 using namespace std;
 
 
 int main()
 {
-   int matrix[5][8];
+   int row,clm;
+   cin>>row>>clm;
    
-   for(int x=0;x<5;x++)
+   int mat[row+1][clm+1];
+   
+   for(int i=0;i<row;i++)
    {
-     for(int y=0;y<8;y++)
+     for(int j=0;j<clm;j++)
      {
-     	cin>>matrix[x][y];
-     	
-     	if(x>0 && matrix[x][y]==1)
-     	{
-     	  matrix[x][y]+=matrix[x-1][y];
-     	}
-     	
-     //	cout<<matrix[x][y]<<" ";
+       cin>>mat[i][j];
+       
+       if(i>0 && mat[i][j]!=0)
+        mat[i][j]+=mat[i-1][j];
      }
-    // cout<<endl;
    }
    
    
- 
    
-   int final=0,temp=0;
-   stack<pair<int,int>> index;
-   pair<int,int> now;
+   vector<pair<int,int>> index; // value,pos
+   int final=0;
+   
   
-  
-  
-  for(int x=0;x<5;x++)
-   {
-     int arr[100]={};
-     for(int y=0;y<8;y++)
-     {  
-         //cout<<"index: "<<y+1<<"   "<<matrix[x][y]<<endl;
-         if((index.empty() || index.top().first<=matrix[x][y]) && matrix[x][y]>0)
-         {
-         	index.push(make_pair(matrix[x][y],y));
-         	//cout<<"pushed  "<<index.top().second<<endl;
-         }
-         else if(!index.empty() && matrix[x][y]<index.top().first)
-         {
-         	int count=index.top().second+1,last_index=0,cnt=0;
-         	
-         	while(!index.empty() && matrix[x][y]<index.top().first)
-         	 {
-         	    if(index.top().second>last_index)
-         	     last_index=index.top().second;
-         	     
-         	    temp=(count-index.top().second)*index.top().first+arr[index.top().second];
-         	    index.pop();
-         	 
-         	    cnt++;
-         	    if(temp>final)
-         	     final=temp;
-         	     
-         	    // cout<<"poped"<<endl;
-         	     
-              }
-         	
-         	if(matrix[x][y] > 0)
-         	 {
-         	   index.push(make_pair(matrix[x][y],y+1));
-         	   arr[index.top().second]=cnt*matrix[x][y];
-         	   //cout<<"pushed  "<<index.top().second<<"  count is: "<<cnt*matrix[x][y] <<endl;
-         	 }
-         }
-     	
-     }
+   for(int i=0;i<row;i++)
+    {
+      //cout<<i+1<<"th column.........."<<endl;
+      int temp=0,arr[1000000]={};
      
-     if(!index.empty())
-     {
-         	int count=index.top().second+1,last_index,cnt=0;
-         	
-         	while(!index.empty())
-         	{
-         	    if(index.top().second>last_index)
-         	     last_index=index.top().second;
-         	      
-         	    temp=(count-index.top().second)*index.top().first+arr[index.top().second];
-         	    index.pop();
-         	    //cout<<"popedes"<<endl;
-         	    
-         	    if(temp>final)
-         	     final=temp;
-
-         	}
-     }
-     
-     //cout<<"final is: :::::: "<<final<<endl;
+      for(int j=0;j<clm;j++)
+       {
+        
+         if((index.empty() || index.back().first<=mat[i][j]) && mat[i][j]>0)
+          {
+         	index.push_back(make_pair(mat[i][j],j));
+          }
+         else
+          {
+          	 int cnt=0,dist=0;
+             while(!index.empty() && index.back().first>mat[i][j])
+             {
+               if(dist<index.back().second)
+                dist=index.back().second;
+                 
+               temp=( index.back().first * (dist+1 - index.back().second) )+arr[index.back().second];
+               
+               if(temp>final)
+                final=temp;
+                
+               index.pop_back();
+               cnt++;
+             }
+            
+             if(mat[i][j]>0)
+             {
+               arr[j]=cnt*mat[i][j];
+               index.push_back(make_pair(mat[i][j],j));
+             }
+          	
+          }
+       }
+       
+       if(!index.empty())
+       {
+          int dist=0;
+          while(!index.empty())
+             {
+               if(dist<index.back().second)
+                dist=index.back().second;
+                 
+               temp=( index.back().first * (dist+1 - index.back().second) )+arr[index.back().second];
+               
+               if(temp>final)
+                final=temp;
+                
+               index.pop_back();
+                
+             }
+         
+       }
  
-   }
+    }
+   
    
    cout<<final<<endl;
    
